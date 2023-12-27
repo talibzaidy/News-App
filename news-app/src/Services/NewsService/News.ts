@@ -1,7 +1,7 @@
 import { ChipFilterType } from "../../Pages/Home/types";
 import APIClient from "../../Providers/ApiClient";
 import config from "../../config";
-import { NewsArticleType } from "./types";
+import { NewsApiResponse } from "./types";
 
 type LanguageType = "ar" | "en";
 
@@ -14,7 +14,7 @@ type ParamsType = {
 };
 
 export default class News {
-  public static Everything(params: ParamsType): Promise<NewsArticleType[]> {
+  public static Everything(params: ParamsType): Promise<NewsApiResponse> {
     const {
       q: query,
       from,

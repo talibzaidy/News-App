@@ -10,24 +10,38 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import News from "../../Services/NewsService/News";
+import { ChipFilterEnum } from "../../Pages/Home/types";
+import { LanguageEnum } from "../../Constants/Locale";
 
 const newsBy: string[] = ["tesla", "apple", "meta", "google"];
-const NavigationBar = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState("english");
-  const [isDarkMode, setIsDarkMode] = useState(false);
+
+const NavigationBar = (props: any) => {
+  const {
+    setChipFilter,
+    selectedLanguage,
+    setSelectedLanguage,
+    isDarkMode,
+    setIsDarkMode,
+  } = props;
 
   const handleClick = (chip: string) => {
-    console.log(chip);
+    setChipFilter(chip);
   };
 
   const handleLanguageChange = (event: SelectChangeEvent<string>) => {
-    setSelectedLanguage(event.target.value as string);
+    const value = event.target.value as string;
+    setSelectedLanguage(value);
+    value === LanguageEnum.ENGLISH.value
+      ? (document.dir = "ltr")
+      : (document.dir = "rtl");
   };
 
   const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => !prevMode);
+    setIsDarkMode((prevMode: boolean) => !prevMode);
   };
+
   return (
     <>
       <AppBar>
@@ -35,21 +49,23 @@ const NavigationBar = () => {
           <NewspaperOutlined></NewspaperOutlined>
           <Typography>News App</Typography>
 
-          {newsBy &&
-            newsBy.map((item, index) => {
-              return (
-                <Chip
-                  key={index}
-                  label={item}
-                  onClick={() => handleClick(item)}
-                ></Chip>
-              );
-            })}
+          {Object.entries(ChipFilterEnum).map(([key, value]) => (
+            <Chip
+              key={key}
+              label={value}
+              onClick={() => handleClick(value)}
+            ></Chip>
+          ))}
+
           <div>
             <InputLabel>Language</InputLabel>
             <Select onChange={handleLanguageChange} value={selectedLanguage}>
-              <MenuItem value="english">English</MenuItem>
-              <MenuItem value="arabic">Arabic</MenuItem>
+              <MenuItem value={LanguageEnum.ENGLISH.value}>
+                {LanguageEnum.ENGLISH.label}
+              </MenuItem>
+              <MenuItem value={LanguageEnum.ARABIC.value}>
+                {LanguageEnum.ARABIC.label}
+              </MenuItem>
             </Select>
           </div>
 

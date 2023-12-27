@@ -6,6 +6,7 @@ import {
   CardMedia,
   Grid,
   Skeleton,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -29,9 +30,11 @@ const NewsCard = (newsDetails: INewsCardProps) => {
         </CardContent>
 
         <CardActions>
-          <Button size="small" onClick={handleNewsUrlLink}>
-            Learn More
-          </Button>
+          <Tooltip title={url}>
+            <Button size="small" onClick={handleNewsUrlLink}>
+              {t(locale.LEARN_MORE)}
+            </Button>
+          </Tooltip>
         </CardActions>
       </Card>
     </Grid>

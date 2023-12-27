@@ -3,8 +3,6 @@ import APIClient from "../../Providers/ApiClient";
 import config from "../../config";
 import { NewsApiResponse } from "./types";
 
-type LanguageType = "ar" | "en";
-
 type ParamsType = {
   q: ChipFilterType;
   from: string;

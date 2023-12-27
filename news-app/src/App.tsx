@@ -1,16 +1,9 @@
 import React from "react";
 import "./App.css";
-import NavigationBar from "./Components/NavigationBar";
-import { Grid, Stack } from "@mui/material";
+import Home from "./Pages/Home/Home";
 
 function App() {
-  return (
-    <Grid>
-      <Stack direction={"column"} spacing={15}>
-        <NavigationBar />
-      </Stack>
-    </Grid>
-  );
+  return <Home />;
 }
 
 export default App;

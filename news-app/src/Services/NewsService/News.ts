@@ -9,7 +9,7 @@ type ParamsType = {
   q: ChipFilterType;
   from: string;
   to: string;
-  selectedLanguage: LanguageType;
+  language: string;
   sortBy?: string;
 };
 
@@ -19,7 +19,7 @@ export default class News {
       q: query,
       from,
       to,
-      selectedLanguage,
+      language: selectedLanguage,
       sortBy = "publishedAt",
     } = params;
     const client = new APIClient(config.BASE_URL);

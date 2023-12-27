@@ -1,12 +1,15 @@
 import React from "react";
 import "./App.css";
 import NavigationBar from "./Components/NavigationBar";
+import { Grid, Stack } from "@mui/material";
 
 function App() {
   return (
-    <div>
-      <NavigationBar />
-    </div>
+    <Grid>
+      <Stack direction={"column"} spacing={15}>
+        <NavigationBar />
+      </Stack>
+    </Grid>
   );
 }
 

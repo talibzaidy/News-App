@@ -14,8 +14,7 @@ import React, { useEffect, useState } from "react";
 import News from "../../Services/NewsService/News";
 import { ChipFilterEnum } from "../../Pages/Home/types";
 import { LanguageEnum } from "../../Constants/Locale";
-
-const newsBy: string[] = ["tesla", "apple", "meta", "google"];
+import { useTranslation } from "react-i18next";
 
 const NavigationBar = (props: any) => {
   const {
@@ -26,6 +25,7 @@ const NavigationBar = (props: any) => {
     setIsDarkMode,
   } = props;
 
+  const { t, i18n } = useTranslation();
   const handleClick = (chip: string) => {
     setChipFilter(chip);
   };
@@ -33,9 +33,8 @@ const NavigationBar = (props: any) => {
   const handleLanguageChange = (event: SelectChangeEvent<string>) => {
     const value = event.target.value as string;
     setSelectedLanguage(value);
-    value === LanguageEnum.ENGLISH.value
-      ? (document.dir = "ltr")
-      : (document.dir = "rtl");
+    i18n.changeLanguage(value);
+    document.body.dir = i18n.dir();
   };
 
   const toggleDarkMode = () => {
@@ -52,13 +51,13 @@ const NavigationBar = (props: any) => {
           {Object.entries(ChipFilterEnum).map(([key, value]) => (
             <Chip
               key={key}
-              label={value}
+              label={t(`${value}`)}
               onClick={() => handleClick(value)}
             ></Chip>
           ))}
 
           <div>
-            <InputLabel>Language</InputLabel>
+            <InputLabel>{t("language")}</InputLabel>
             <Select onChange={handleLanguageChange} value={selectedLanguage}>
               <MenuItem value={LanguageEnum.ENGLISH.value}>
                 {LanguageEnum.ENGLISH.label}

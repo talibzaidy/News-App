@@ -1,4 +1,9 @@
-export const LanguageEnum = {
-  ARABIC: { label: "Arabic", value: "ar" },
-  ENGLISH: { label: "English", value: "en" },
+export const languageConfig = {
+  ARABIC: { label: "arabic", value: "ar" },
+  ENGLISH: { label: "english", value: "en" },
+};
+
+export const locale = {
+  NEWS_APP: "news-app",
+  LEARN_MORE: "learn-more",
 };

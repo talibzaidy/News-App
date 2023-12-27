@@ -1,19 +1,18 @@
 import React from "react";
-import { CardMedia, Skeleton } from "@mui/material";
+import { CardMedia, Skeleton, Typography } from "@mui/material";
+import { IThumbnailProps } from "./Thumbnail.interface";
+import fallbackImage from "../../Assets/fallback.jpg";
 
-const Thumbnail = (props: { src?: string }) => {
+const Thumbnail = (props: IThumbnailProps) => {
+  const { src: imageSource } = props;
   return (
     <>
-      {props.src ? (
-        <CardMedia
-          component="img"
-          image={props.src}
-          title="news"
-          height="140"
-        />
-      ) : (
-        <Skeleton variant="rectangular" height={150} animation="pulse" />
-      )}
+      <CardMedia
+        component="img"
+        image={imageSource ? imageSource : fallbackImage}
+        alt={fallbackImage}
+        height={150}
+      />
     </>
   );
 };

@@ -1,0 +1,21 @@
+.navbar {
+  justify-content: space-between;
+
+  .app-name {
+    display: flex;
+    align-items: center;
+  }
+
+  .query-chips {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}

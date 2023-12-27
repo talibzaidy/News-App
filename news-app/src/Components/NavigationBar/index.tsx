@@ -2,21 +2,25 @@ import { NewspaperOutlined } from "@mui/icons-material";
 import {
   AppBar,
   Chip,
-  InputLabel,
+  Container,
+  Grid,
+  IconButton,
   MenuItem,
   Select,
   SelectChangeEvent,
-  Switch,
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import News from "../../Services/NewsService/News";
-import { ChipFilterEnum } from "../../Pages/Home/types";
-import { LanguageEnum } from "../../Constants/Locale";
+import React from "react";
+import { ChipFilterEnum, ChipFilterType } from "../../Pages/Home/types";
+import { languageConfig, locale } from "../../Constants/Locale";
 import { useTranslation } from "react-i18next";
+import { INavBarProps } from "./NavigationBar.interface";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import "./styles.css";
 
-const NavigationBar = (props: any) => {
+const NavigationBar = (props: INavBarProps) => {
   const {
     setChipFilter,
     selectedLanguage,
@@ -26,7 +30,8 @@ const NavigationBar = (props: any) => {
   } = props;
 
   const { t, i18n } = useTranslation();
-  const handleClick = (chip: string) => {
+
+  const handleClick = (chip: ChipFilterType) => {
     setChipFilter(chip);
   };
 
@@ -38,39 +43,54 @@ const NavigationBar = (props: any) => {
   };
 
   const toggleDarkMode = () => {
-    setIsDarkMode((prevMode: boolean) => !prevMode);
+    setIsDarkMode(!isDarkMode);
   };
 
   return (
     <>
       <AppBar>
-        <Toolbar>
-          <NewspaperOutlined></NewspaperOutlined>
-          <Typography>News App</Typography>
+        <Toolbar className="navbar">
+          <Container>
+            <Grid container spacing={2}>
+              <Grid item md={3} className="app-name">
+                <NewspaperOutlined></NewspaperOutlined>
+                <Typography>{t(locale.NEWS_APP)}</Typography>
+              </Grid>
 
-          {Object.entries(ChipFilterEnum).map(([key, value]) => (
-            <Chip
-              key={key}
-              label={t(`${value}`)}
-              onClick={() => handleClick(value)}
-            ></Chip>
-          ))}
+              <Grid item className="query-chips" md>
+                {Object.entries(ChipFilterEnum).map(([key, value]) => (
+                  <Chip
+                    variant="outlined"
+                    key={key}
+                    label={t(`${value}`)}
+                    onClick={() => handleClick(value)}
+                  ></Chip>
+                ))}
+              </Grid>
 
-          <div>
-            <InputLabel>{t("language")}</InputLabel>
-            <Select onChange={handleLanguageChange} value={selectedLanguage}>
-              <MenuItem value={LanguageEnum.ENGLISH.value}>
-                {LanguageEnum.ENGLISH.label}
-              </MenuItem>
-              <MenuItem value={LanguageEnum.ARABIC.value}>
-                {LanguageEnum.ARABIC.label}
-              </MenuItem>
-            </Select>
-          </div>
+              <Grid item md={3}>
+                <Select
+                  onChange={handleLanguageChange}
+                  value={selectedLanguage}
+                >
+                  <MenuItem value={languageConfig.ENGLISH.value}>
+                    {t(languageConfig.ENGLISH.label)}
+                  </MenuItem>
+                  <MenuItem value={languageConfig.ARABIC.value}>
+                    {t(languageConfig.ARABIC.label)}
+                  </MenuItem>
+                </Select>
 
-          <div>
-            <Switch checked={isDarkMode} onChange={toggleDarkMode} />
-          </div>
+                <IconButton
+                  sx={{ ml: 1 }}
+                  onClick={toggleDarkMode}
+                  color="inherit"
+                >
+                  {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Container>
         </Toolbar>
       </AppBar>
     </>

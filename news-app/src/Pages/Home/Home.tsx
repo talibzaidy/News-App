@@ -4,7 +4,7 @@ import { Box, CircularProgress, Grid, Stack } from "@mui/material";
 import { ChipFilterEnum, ChipFilterType } from "./types";
 import News from "../../Services/NewsService/News";
 import { formattedDateDuration } from "../../Helper/Date";
-import { languageConfig, locale } from "../../Constants/Locale";
+import { languageConfig } from "../../Constants/Locale";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { NewsArticleType } from "../../Services/NewsService/types";
 import NewsCard from "../../Components/NewsCard";
@@ -32,6 +32,7 @@ const Home = () => {
   useEffect(() => {
     const { from, to } = formattedDateDuration();
     setLoading(true);
+    setArticlesData([]);
     News.Everything({
       q: chipFilter,
       from: from,

@@ -71,17 +71,15 @@ const Home = () => {
             {articleData && articleData.length > 0
               ? articleData.map((item, index) => {
                   return (
-                    <Grid item xs="auto" key={index}>
-                      <NewsCard
-                        key={index}
-                        author={item.author}
-                        content={item.content}
-                        description={item.description}
-                        title={item.title}
-                        url={item.url}
-                        urlToImage={item.urlToImage}
-                      />
-                    </Grid>
+                    <NewsCard
+                      key={index}
+                      author={item.author}
+                      content={item.content}
+                      description={item.description}
+                      title={item.title}
+                      url={item.url}
+                      urlToImage={item.urlToImage}
+                    />
                   );
                 })
               : loading && (

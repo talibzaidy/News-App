@@ -11,7 +11,8 @@ const Thumbnail = (props: IThumbnailProps) => {
         component="img"
         image={imageSource ? imageSource : fallbackImage}
         alt={fallbackImage}
-        height={150}
+        height={170}
+        width={"100%"}
       />
     </>
   );

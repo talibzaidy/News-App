@@ -6,7 +6,7 @@ export default class APIClient {
     this.baseURL = baseURL;
   }
 
-  async get(endpoint: string): Promise<any> {
+  async get<T>(endpoint: string): Promise<T> {
     const url = `${config.PROXY_URL_NEWS}${this.baseURL}/${endpoint}`;
 
     try {

@@ -22,7 +22,7 @@ export default class News {
     } = params;
     const client = new APIClient(config.BASE_URL);
 
-    return client.get(
+    return client.get<NewsApiResponse>(
       `v2/everything?q=${query}&from=${from}&to=${to}&sortBy=${sortBy}&language=${selectedLanguage}&apiKey=${config.API_KEY_NEWS}`
     );
   }

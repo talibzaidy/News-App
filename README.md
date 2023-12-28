@@ -67,3 +67,7 @@ The project is organized into the following directories:
 ## Modifying the Project
 
 When making changes or additions to the project, ensure to maintain the existing structure and naming conventions for consistency. Add new components, pages, or services in their respective directories and follow best practices for React development.
+
+## Additional Notes
+
+- All the development was done on on 'develop' branch, so for checking commits, go to commits section of 'develop' branch.
